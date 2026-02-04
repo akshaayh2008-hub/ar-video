@@ -53,9 +53,23 @@
   </a-scene>
 
   <script>
-    document.body.addEventListener('click', () => {
-      document.querySelector('#vid').play();
-    });
+const marker = document.querySelector('a-marker');
+  const video = document.querySelector('#vid');
+
+  // iOS requires one user interaction
+  document.body.addEventListener('click', () => {
+    video.play();
+    video.pause();
+  }, { once: true });
+
+  marker.addEventListener('markerFound', () => {
+    video.play();
+  });
+
+  marker.addEventListener('markerLost', () => {
+    video.pause();
+  });
   </script>
 </body>
 </html>
+
